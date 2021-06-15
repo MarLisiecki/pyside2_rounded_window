@@ -7,10 +7,10 @@ except ImportError:
 
 
 def hex2QColor(c):
-    r=int(c[0:2],16)
-    g=int(c[2:4],16)
-    b=int(c[4:6],16)
-    return QtGui.QColor(r,g,b)
+    r = int(c[0:2], 16)
+    g = int(c[2:4], 16)
+    b = int(c[4:6], 16)
+    return QtGui.QColor(r, g, b)
 
 
 class RoundedWindow(QtWidgets.QWidget):
@@ -34,20 +34,20 @@ class RoundedWindow(QtWidgets.QWidget):
 
     def paintEvent(self, event):
         # get current window size
-        s = self.size()
-        qp = QtGui.QPainter()
-        qp.begin(self)
-        qp.setRenderHint(QtGui.QPainter.Antialiasing, True)
-        qp.setPen(self.foregroundColor)
-        qp.setBrush(self.backgroundColor)
-        qp.drawRoundedRect(0, 0, s.width(), s.height(),
-                           self.broder_radius, self.broder_radius)
-        qp.end()
+        size = self.size()
+        q_painter = QtGui.QPainter()
+        q_painter.begin(self)
+        q_painter.setRenderHint(QtGui.QPainter.Antialiasing, True)
+        q_painter.setPen(self.foregroundColor)
+        q_painter.setBrush(self.backgroundColor)
+        q_painter.drawRoundedRect(0, 0, size.width(), size.height(),
+                                  self.broder_radius, self.broder_radius)
+        q_painter.end()
 
     def mousePressEvent(self, event):
         if self.draggable and event.button() == QtCore.Qt.LeftButton:
-            self.__mouse_pressed_position = event.globalPos()                # global
-            self._mouse_move_positions = event.globalPos() - self.pos()    # local
+            self.__mouse_pressed_position = event.globalPos()  # global
+            self._mouse_move_positions = event.globalPos() - self.pos()  # local
         super(RoundedWindow, self).mousePressEvent(event)
 
     def mouseMoveEvent(self, event):
@@ -77,6 +77,7 @@ class RoundedWindow(QtWidgets.QWidget):
 
 if __name__ == '__main__':
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     main = RoundedWindow()
     main.show()
